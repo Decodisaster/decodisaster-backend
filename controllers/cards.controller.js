@@ -49,8 +49,7 @@ export const getcardbyCard_number = async (req, res) => {
     try {
 
         // Find the player by ID
-        const player = await Player.findById(playerId); // Assuming req.user._id holds the player's ID
-        console.log(player.fullname)
+        const player = await Player.findById({_id : playerId}); // Assuming req.user._id holds the player's ID
         // If player not found, return 404
         if (!player) {
             return res.status(404).send('Player not found');
