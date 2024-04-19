@@ -9,6 +9,11 @@ const cardSchema = new mongoose.Schema({
         required: [true, 'this is required value'],
         unique: true
     },
+    answer:{
+        type : array,
+        unique : true
+    },
+    question:String,
     points: Number,
     instruction: String,
     noofquestions: Number,
