@@ -10,7 +10,6 @@ const cardSchema = new mongoose.Schema({
         unique: true
     },
     points: Number,
-    question_array:Array,
     instruction: String,
     noofquestions: Number,
 });
