@@ -1,13 +1,14 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const isLoggedIn = async (req, res, next) => {
   try {
     // Extracting token from the cookies
-    const { token } = req.cookies;
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
 
     // If no token, send an unauthorized message
     if (!token) {
-      res.status(400).send('You are not logged in');
+      res.status(400).send("You are not logged in");
       return; // Return to stop further execution
     }
 
@@ -16,7 +17,7 @@ const isLoggedIn = async (req, res, next) => {
 
     // If decoding fails, send an unauthorized message
     if (!decoded) {
-      res.status(401).send('token not identified');
+      res.status(401).send("token not identified");
       return; // Return to stop further execution
     }
 
@@ -27,14 +28,14 @@ const isLoggedIn = async (req, res, next) => {
     next();
   } catch (error) {
     // Handle any errors that occur during token verification
-    if (error.name === 'TokenExpiredError') {
+    if (error.name === "TokenExpiredError") {
       // Token has expired
-      return res.status(401).send('token expired');
+      return res.status(401).send("token expired");
     }
 
     // For other errors, you might want to log the error and send a generic unauthorized message
-    console.error('Error during token verification:', error);
-    return res.status(401).send('token not identified');
+    console.error("Error during token verification:", error);
+    return res.status(401).send("token not identified");
   }
 };
 

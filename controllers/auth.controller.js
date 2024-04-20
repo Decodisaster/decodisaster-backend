@@ -75,3 +75,12 @@ export const answer = async (req, res) => {
   res.send("Answer Saved Successfully");
 };
 
+export const getUser = async (req, res) => {
+    try {
+        const user = await Player.findById(req.user._id).select('-password');
+        res.status(200).json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+} 
