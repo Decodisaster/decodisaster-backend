@@ -29,7 +29,8 @@ export const login = async (req, res, next) => {
 
     res.cookie("token", token, {
       httpOnly: true, //csrf protection
-      maxAge: 7200000, // 2 hour in milliseconds
+      // maxAge: 7200000, // 2 hour in milliseconds
+      
     });
     res.status(200).json({ token });
   } catch (err) {
